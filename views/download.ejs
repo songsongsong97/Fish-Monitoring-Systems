@@ -1,0 +1,35 @@
+<%- include("header")  %>
+<div class="container">
+  <!-- dropdown button to select date -->
+  <div class="select-date justify-content-center">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Select Date
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="date-menu">
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("footer")  %>
+<script>
+  let yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 0);
+  let fortnight = new Date();
+  fortnight.setDate(fortnight.getDate() - 14);
+  let dates = [];
+  //report dates
+  for (dt = fortnight; dt <= yesterday; dt.setDate(dt.getDate() + 1)) {
+    dates.push(new Date(dt).toGMTString().split(', ')[1].substring(0, 11));
+  }
+  // console.log(dates);
+  let dateMenu = document.getElementById('date-menu');
+  dates.forEach(function(date){
+    dateMenu.innerHTML += "<a class='dropdown-item' href='../report/" + date +"'>" + date + "</a>";
+  });
+
+</script>
+</body>
+
+</html>
